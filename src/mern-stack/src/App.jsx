@@ -27,7 +27,7 @@ class IssueRow extends React.Component {
         return(
             <tr>
                 <td style={style}>{this.props.issue_id}</td>
-                <td style={style}>{this.props.issue_title}</td>
+                <td style={style}>{this.props.children}</td>
             </tr>
         );
     }
@@ -45,14 +45,12 @@ class IssueTable extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <IssueRow 
-                        rowStyle={rowStyle} 
-                        issue_id={1}
-                        issue_title="Error in console when clicking Add"/>{/* somehow pass Issue 1 data to this */}
-                    <IssueRow 
-                        rowStyle={rowStyle} 
-                        issue_id={2}
-                        issue_title="Missing bottom border on panel"/>{/* somehow pass Issue 2 data to this */}
+                    <IssueRow rowStyle={rowStyle} issue_id={1}>
+                        Error in console when clicking Add
+                    </IssueRow>{/* somehow pass Issue 1 data to this */}
+                    <IssueRow rowStyle={rowStyle} issue_id={2}>
+                        <div>Missing <b>bottom</b> border on panel</div>
+                    </IssueRow>{/* somehow pass Issue 2 data to this */}
                 </tbody>
             </table>
         );
