@@ -69,10 +69,36 @@ function (_React$Component2) {
   return IssueFilter;
 }(React.Component);
 
-var IssueTable =
+var IssueRow =
 /*#__PURE__*/
 function (_React$Component3) {
-  _inherits(IssueTable, _React$Component3);
+  _inherits(IssueRow, _React$Component3);
+
+  function IssueRow() {
+    _classCallCheck(this, IssueRow);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(IssueRow).apply(this, arguments));
+  }
+
+  _createClass(IssueRow, [{
+    key: "render",
+    value: function render() {
+      var style = this.props.rowStyle;
+      return React.createElement("tr", null, React.createElement("td", {
+        style: style
+      }, this.props.issue_id), React.createElement("td", {
+        style: style
+      }, this.props.issue_title));
+    }
+  }]);
+
+  return IssueRow;
+}(React.Component);
+
+var IssueTable =
+/*#__PURE__*/
+function (_React$Component4) {
+  _inherits(IssueTable, _React$Component4);
 
   function IssueTable() {
     _classCallCheck(this, IssueTable);
@@ -83,7 +109,26 @@ function (_React$Component3) {
   _createClass(IssueTable, [{
     key: "render",
     value: function render() {
-      return React.createElement("div", null, "This is a place holder for a table of issues.");
+      var rowStyle = {
+        border: "1px solid silver, padding:4"
+      };
+      return React.createElement("table", {
+        style: {
+          borderCollapse: "collapse"
+        }
+      }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", {
+        style: rowStyle
+      }, "ID"), React.createElement("th", {
+        style: rowStyle
+      }, "Title"))), React.createElement("tbody", null, React.createElement(IssueRow, {
+        rowStyle: rowStyle,
+        issue_id: 1,
+        issue_title: "Error in console when clicking Add"
+      }), React.createElement(IssueRow, {
+        rowStyle: rowStyle,
+        issue_id: 2,
+        issue_title: "Missing bottom border on panel"
+      })));
     }
   }]);
 
@@ -92,8 +137,8 @@ function (_React$Component3) {
 
 var IssueAdd =
 /*#__PURE__*/
-function (_React$Component4) {
-  _inherits(IssueAdd, _React$Component4);
+function (_React$Component5) {
+  _inherits(IssueAdd, _React$Component5);
 
   function IssueAdd() {
     _classCallCheck(this, IssueAdd);
@@ -113,8 +158,8 @@ function (_React$Component4) {
 
 var IssueList =
 /*#__PURE__*/
-function (_React$Component5) {
-  _inherits(IssueList, _React$Component5);
+function (_React$Component6) {
+  _inherits(IssueList, _React$Component6);
 
   function IssueList() {
     _classCallCheck(this, IssueList);

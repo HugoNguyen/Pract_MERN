@@ -79,3 +79,11 @@ $ npm start
 #Chapter 03
 #React classes are created by extending React.Component
 
+#Pass data to child components
+#First way, using properties
+<IssueRow issue_title="Title of the first issue" /> //pass value
+<td>{this.props.issue_title}</td> //retrieve
+
+#List of DOM element, and how attribute for these
+https://reactjs.org/docs/dom-elements.html
+
