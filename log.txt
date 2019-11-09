@@ -88,3 +88,5 @@ $ npm start
 #List of DOM element, and how attribute for these
 https://reactjs.org/docs/dom-elements.html
 
+#Dynamic compsition
+

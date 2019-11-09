@@ -18,40 +18,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var HelloWorld =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(HelloWorld, _React$Component);
-
-  function HelloWorld() {
-    _classCallCheck(this, HelloWorld);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(HelloWorld).apply(this, arguments));
-  }
-
-  _createClass(HelloWorld, [{
-    key: "render",
-    value: function render() {
-      var continents = ['Africa', 'America', 'Asia', 'Australia', 'Europe'];
-      var helloContinents = Array.from(continents, function (c) {
-        return "Hello ".concat(c, "!");
-      });
-      var message = helloContinents.join(' ');
-      return React.createElement("div", {
-        title: "Outer div"
-      }, React.createElement("h1", {
-        className: "class_h1"
-      }, message));
-    }
-  }]);
-
-  return HelloWorld;
-}(React.Component);
+var issues = [{
+  id: 1,
+  status: 'New',
+  owner: 'Ravan',
+  effort: 5,
+  created: new Date('2018-08-15'),
+  due: undefined,
+  title: 'Error in console when clicking Add'
+}, {
+  id: 2,
+  status: 'Assigned',
+  owner: 'Eddie',
+  effort: 14,
+  created: new Date('2018-08-16'),
+  due: new Date('2018-08-30'),
+  title: 'Missing bottom border on panel'
+}];
 
 var IssueFilter =
 /*#__PURE__*/
-function (_React$Component2) {
-  _inherits(IssueFilter, _React$Component2);
+function (_React$Component) {
+  _inherits(IssueFilter, _React$Component);
 
   function IssueFilter() {
     _classCallCheck(this, IssueFilter);
@@ -71,8 +59,8 @@ function (_React$Component2) {
 
 var IssueRow =
 /*#__PURE__*/
-function (_React$Component3) {
-  _inherits(IssueRow, _React$Component3);
+function (_React$Component2) {
+  _inherits(IssueRow, _React$Component2);
 
   function IssueRow() {
     _classCallCheck(this, IssueRow);
@@ -83,12 +71,8 @@ function (_React$Component3) {
   _createClass(IssueRow, [{
     key: "render",
     value: function render() {
-      var style = this.props.rowStyle;
-      return React.createElement("tr", null, React.createElement("td", {
-        style: style
-      }, this.props.issue_id), React.createElement("td", {
-        style: style
-      }, this.props.children));
+      var issue = this.props.issue;
+      return React.createElement("tr", null, React.createElement("td", null, issue.id), React.createElement("td", null, issue.status), React.createElement("td", null, issue.owner), React.createElement("td", null, issue.created.toDateString()), React.createElement("td", null, issue.effort), React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), React.createElement("td", null, issue.title));
     }
   }]);
 
@@ -97,8 +81,8 @@ function (_React$Component3) {
 
 var IssueTable =
 /*#__PURE__*/
-function (_React$Component4) {
-  _inherits(IssueTable, _React$Component4);
+function (_React$Component3) {
+  _inherits(IssueTable, _React$Component3);
 
   function IssueTable() {
     _classCallCheck(this, IssueTable);
@@ -109,24 +93,15 @@ function (_React$Component4) {
   _createClass(IssueTable, [{
     key: "render",
     value: function render() {
-      var rowStyle = {
-        border: "1px solid silver, padding:4"
-      };
+      var issueRows = issues.map(function (issue) {
+        return React.createElement(IssueRow, {
+          key: issue.id,
+          issue: issue
+        });
+      });
       return React.createElement("table", {
-        style: {
-          borderCollapse: "collapse"
-        }
-      }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", {
-        style: rowStyle
-      }, "ID"), React.createElement("th", {
-        style: rowStyle
-      }, "Title"))), React.createElement("tbody", null, React.createElement(IssueRow, {
-        rowStyle: rowStyle,
-        issue_id: 1
-      }, "Error in console when clicking Add"), React.createElement(IssueRow, {
-        rowStyle: rowStyle,
-        issue_id: 2
-      }, React.createElement("div", null, "Missing ", React.createElement("b", null, "bottom"), " border on panel"))));
+        className: "bordered-table"
+      }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", null, "ID"), React.createElement("th", null, "Status"), React.createElement("th", null, "Owner"), React.createElement("th", null, "Created"), React.createElement("th", null, "Effort"), React.createElement("th", null, "Due Date"), React.createElement("th", null, "Title"))), React.createElement("tbody", null, issueRows));
     }
   }]);
 
@@ -135,8 +110,8 @@ function (_React$Component4) {
 
 var IssueAdd =
 /*#__PURE__*/
-function (_React$Component5) {
-  _inherits(IssueAdd, _React$Component5);
+function (_React$Component4) {
+  _inherits(IssueAdd, _React$Component4);
 
   function IssueAdd() {
     _classCallCheck(this, IssueAdd);
@@ -156,8 +131,8 @@ function (_React$Component5) {
 
 var IssueList =
 /*#__PURE__*/
-function (_React$Component6) {
-  _inherits(IssueList, _React$Component6);
+function (_React$Component5) {
+  _inherits(IssueList, _React$Component5);
 
   function IssueList() {
     _classCallCheck(this, IssueList);
