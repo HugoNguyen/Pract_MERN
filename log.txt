@@ -7,3 +7,75 @@ Go to, mern-stack
 $ npm init
 =>create a package.json, to file will ensure that all changes and installatios are localize to this project
 $ npm install express
+
+Day 2, Nov 09 2019
+#continue Chap 02
+#learn the way to new an express app
+const express = require('express'); //import express module
+const app = express(); //new exxpress app web server
+
+#declare a middleware, to return static file like html, js, css. And equip it to application
+const fileServerMiddleware = express.static('public');//A middleware, to return a looking static file base on reqs
+app.use('/',fileServerMiddleware);//Mount the middleware for this app.
+
+#Declare a port for this app listen to
+app.listen(port,function(){
+    console.log('App started on port 3000');
+});
+
+#To run this app
+$ node server.js
+or
+$ npm start
+
+#If we move server.js to a subfolder called 'server', then invoke '$npm start', we will got an error
+#So we can tell npm know that the entry point is 'server/server.js' by adding to script section of package.json
+scripts:start="node server/server.js"
+
+#In package.json, we have a property called, "main": "index.js". This is not entry point.
+#Index.js is would have been load when the project is imported as a module, using 'require'
+
+#Separate Script File
+#Separate out the JSX and Javascript from index.html
+#JSX Transform, we'll move the transform to build time
+#New a folder to holde jsx file, ex: App.jsx
+#Install, Babel's tool, for transformation
+$ npm install --save-dev @babel/core@7 @babel/cli@7
+$ node_modules/.bin/babel --version or $ npx babel --verion
+$ npm install -save-dev @babel/preset-react@7
+#Now, to transform App.jsx to pure javascript, and put the output int the public directory
+$ npx babel src --presets @babel/react --out-dir public
+
+#Support older browser
+#Example, Array.from, can not be understood on older browsers.
+#So, we'll use babel plugin, plugin-transform-arrow-functions, to transformed
+#First, install plugin, plugin-transform-arrow-functions
+$ npm install --no-save @babel/plugin-transform-arrow-functions@7
+
+#Then, using this plugin and tranform source
+$ npx babel src --presets @babel/react --plugin=@babel/plugin-transform-arrow-functions --out-dir public
+=> nothing changed
+
+#Install preset-env
+$ npm install --save-dev @babel/preset-env@7
+
+#New file src/.babelrc, for babel config
+#Execute transform
+$ npx babel src --out-dir public
+
+#Automate
+#Install nodemon, for watching changes on files
+$ npm install nodemon@1
+
+#Add to package.json, some script
+scripts:start = "nodemon -w server server/server.js"
+scripts:compile = "babel src --out-dir public"
+scripts:watch = "babel src --out-dir public --watch --verbose"
+
+#Run to terminal, one for watching jsx changed, an another for watching on js,html, css
+$ npm run watch
+$ npm start
+
+#Chapter 03
+#React classes are created by extending React.Component
+
