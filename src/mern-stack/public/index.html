@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Pro Mern stack</title>
+		<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+		<!--
+			Babel: a complier, to transform JSX to regular js
+		-->
+		<!-- <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script> -->
+
+		<style>
+			.class_h1{
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content"></div>
+		<!--
+			<h1 class='class_h1'>Hello World!</h1>
+			=> error, react not understand keyword 'class', must be 'className'
+		-->
+		<!-- <script type='text/babel'> //Tell complier use babel transform this
+			const element = (
+				<div title="Outer div">
+					<h1 className='class_h1'>Hello World!</h1>
+				</div>
+			);
+			ReactDOM.render(element,document.getElementById('content'));
+		</script> -->
+		<!-- <script type="text/babel" src="/App.jsx"></script> -->
+		<script src="/App.js"></script>
+	</body>
+</html>
