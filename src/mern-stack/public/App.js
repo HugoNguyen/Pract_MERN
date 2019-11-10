@@ -36,6 +36,11 @@ var initialIssues = [{
   due: new Date('2018-08-30'),
   title: 'Missing bottom border on panel'
 }];
+var sampleIssue = {
+  status: 'New',
+  owner: 'Pieta',
+  title: 'Completion date should be optional'
+};
 
 var IssueFilter =
 /*#__PURE__*/
@@ -95,6 +100,9 @@ function (_React$Component3) {
       issues: []
     }; //Initialization
 
+    setTimeout(function () {
+      _this.createIssue(sampleIssue);
+    }, 2000);
     return _this;
   }
 
@@ -115,9 +123,19 @@ function (_React$Component3) {
       }, 500);
     }
   }, {
+    key: "createIssue",
+    value: function createIssue(issue) {
+      issue.id = this.state.issues.length + 1;
+      issue.created = new Date();
+      var newIssueList = this.state.issues.slice();
+      newIssueList.push(issue);
+      this.setState({
+        issues: newIssueList
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      // const issueRows = issues.map(issue=><IssueRow key={issue.id} issue={issue}/>);
       var issueRows = this.state.issues.map(function (issue) {
         return React.createElement(IssueRow, {
           key: issue.id,

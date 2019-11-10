@@ -107,3 +107,9 @@ componentDidUpdate(), this.setState can invoke here
 componentWillUnmount(), for cleanup 
 shouldComponentUpdate(), for prevent rerender view
 
+#Update State
+#The state variable cannot be set directly
+this.state.issues.push(newissue); //React cannot identify such changes
+this.setState({issues: newIssues}); //React can dectect such changes
+
+#Using immutable.js for creating a copy optimally
