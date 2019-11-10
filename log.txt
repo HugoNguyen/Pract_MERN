@@ -119,5 +119,13 @@ this.setState({issues: newIssues}); //React can dectect such changes
 this.props.createIssue(sampleIssue);
 <IssueAdd createIssue={this.createIssue.bind(this)} />
 #Question, defferent if not using bind
-ƒ createIssue(issue) -> not bind , this is IssueAdd
+ƒ createIssue(issue) -> not bind , this is not IssueAdd or IssueList, typically the window object
 ƒ bound createIssue() -> bound, this is IssueList
+
+
+#Event Handling
+Create a #form with 2 input #textbox
+and a #button to trigger action
+override #onSubmit of #form
+<form name="issueAdd" onSubmit={this.handleSubmit}>
+#
