@@ -92,13 +92,29 @@ function (_React$Component3) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(IssueTable).call(this));
     _this.state = {
-      issues: initialIssues
+      issues: []
     }; //Initialization
 
     return _this;
   }
 
   _createClass(IssueTable, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadData();
+    }
+  }, {
+    key: "loadData",
+    value: function loadData() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.setState({
+          issues: initialIssues
+        });
+      }, 500);
+    }
+  }, {
     key: "render",
     value: function render() {
       // const issueRows = issues.map(issue=><IssueRow key={issue.id} issue={issue}/>);

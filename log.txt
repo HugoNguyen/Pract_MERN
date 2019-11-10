@@ -99,3 +99,11 @@ In addition to learn about #eventhandler #component's state #interactionofcompem
 #this.state
 Holder everything that can affect the render view
 
+#Async State Initialization
+#this.setState(), for modifying a state
+#lifecycle methods
+componentDidMount(), the dom tree ready, put loading method here
+componentDidUpdate(), this.setState can invoke here
+componentWillUnmount(), for cleanup 
+shouldComponentUpdate(), for prevent rerender view
+

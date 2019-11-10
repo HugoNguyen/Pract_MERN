@@ -50,7 +50,19 @@ class IssueTable extends React.Component {
 
     constructor(){
         super();
-        this.state = {issues: initialIssues}; //Initialization
+        this.state = {issues: []}; //Initialization
+    }
+
+    componentDidMount(){
+        this.loadData();
+    }
+
+    loadData(){
+        setTimeout(()=>{
+            this.setState({
+                issues:initialIssues
+            });
+        },500);
     }
 
     render(){
