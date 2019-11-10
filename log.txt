@@ -128,4 +128,7 @@ Create a #form with 2 input #textbox
 and a #button to trigger action
 override #onSubmit of #form
 <form name="issueAdd" onSubmit={this.handleSubmit}>
-#
+
+#Stateless Components
+For performence issue,
+Convert IssueRow to Stateless component (not using class)
