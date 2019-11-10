@@ -54,10 +54,60 @@ class IssueTable extends React.Component {
 
     constructor(){
         super();
-        this.state = {issues: []}; //Initialization
+    }
+
+    render(){
+
+        // const issueRows = this.state.issues.map(issue=>
+        //         <IssueRow key={issue.id} issue={issue}/>
+        //     );
+
+        const issueRows = this.props.issues.map(issue=><IssueRow key={issue.id} issue={issue}/>);
+        
+        return(
+            <table className="bordered-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Status</th>
+                        <th>Owner</th>
+                        <th>Created</th>
+                        <th>Effort</th>
+                        <th>Due Date</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {issueRows}
+                </tbody>
+            </table>
+        );
+    }
+}
+
+class IssueAdd extends React.Component {
+
+    constructor(){
+        super();
         setTimeout(()=>{
-            this.createIssue(sampleIssue);
+            this.props.createIssue(sampleIssue);
         },2000);
+    }
+
+    render(){
+        return(
+            <div>This is a place holder for a form to add an issue.</div>
+        );
+    }
+}
+
+class IssueList extends React.Component {
+
+    constructor(){
+        super();
+        this.state = {issues:[]};
+
+        this.createIssue = this.createIssue.bind(this); //to make sure, when a copy of createIssue invoke, then the lexical scope bound to IssueList
     }
 
     componentDidMount(){
@@ -82,50 +132,14 @@ class IssueTable extends React.Component {
     }
 
     render(){
-
-        const issueRows = this.state.issues.map(issue=>
-                <IssueRow key={issue.id} issue={issue}/>
-            );
-        
-        return(
-            <table className="bordered-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Status</th>
-                        <th>Owner</th>
-                        <th>Created</th>
-                        <th>Effort</th>
-                        <th>Due Date</th>
-                        <th>Title</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {issueRows}
-                </tbody>
-            </table>
-        );
-    }
-}
-
-class IssueAdd extends React.Component {
-    render(){
-        return(
-            <div>This is a place holder for a form to add an issue.</div>
-        );
-    }
-}
-
-class IssueList extends React.Component {
-    render(){
         return(
             <React.Fragment>
                 <h1>Issue Tracker</h1>
                 <IssueFilter/>
                 <hr/>
-                <IssueTable/>
+                <IssueTable issues={this.state.issues} />
                 <hr/>
-                <IssueAdd/>
+                <IssueAdd createIssue={this.createIssue} />
             </React.Fragment>
         );
     }

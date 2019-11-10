@@ -113,3 +113,11 @@ this.state.issues.push(newissue); //React cannot identify such changes
 this.setState({issues: newIssues}); //React can dectect such changes
 
 #Using immutable.js for creating a copy optimally
+
+#Lifting State Up
+#Binding scope of method
+this.props.createIssue(sampleIssue);
+<IssueAdd createIssue={this.createIssue.bind(this)} />
+#Question, defferent if not using bind
+ƒ createIssue(issue) -> not bind , this is IssueAdd
+ƒ bound createIssue() -> bound, this is IssueList
