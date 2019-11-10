@@ -1,5 +1,6 @@
 
-const issues = [
+//For explicitness, rename 'issues' -> 'initialIssues'
+const initialIssues = [
     {
         id: 1,
         status: 'New',
@@ -46,8 +47,18 @@ class IssueRow extends React.Component {
 }
 
 class IssueTable extends React.Component {
+
+    constructor(){
+        super();
+        this.state = {issues: initialIssues}; //Initialization
+    }
+
     render(){
-        const issueRows = issues.map(issue=><IssueRow key={issue.id} issue={issue}/>);
+        // const issueRows = issues.map(issue=><IssueRow key={issue.id} issue={issue}/>);
+        
+        const issueRows = this.state.issues.map(issue=>
+                <IssueRow key={issue.id} issue={issue}/>
+            );
         
         return(
             <table className="bordered-table">

@@ -90,3 +90,12 @@ https://reactjs.org/docs/dom-elements.html
 
 #Dynamic compsition
 
+Day 3, Nov 10 2019
+#Chap 4
+#React State
+The target is, add a button, on event click of that button, append a row to list
+In addition to learn about #eventhandler #component's state #interactionofcompements
+
+#this.state
+Holder everything that can affect the render view
+
