@@ -90,3 +90,45 @@ https://reactjs.org/docs/dom-elements.html
 
 #Dynamic compsition
 
+Day 3, Nov 10 2019
+#Chap 4
+#React State
+The target is, add a button, on event click of that button, append a row to list
+In addition to learn about #eventhandler #component's state #interactionofcompements
+
+#this.state
+Holder everything that can affect the render view
+
+#Async State Initialization
+#this.setState(), for modifying a state
+#lifecycle methods
+componentDidMount(), the dom tree ready, put loading method here
+componentDidUpdate(), this.setState can invoke here
+componentWillUnmount(), for cleanup 
+shouldComponentUpdate(), for prevent rerender view
+
+#Update State
+#The state variable cannot be set directly
+this.state.issues.push(newissue); //React cannot identify such changes
+this.setState({issues: newIssues}); //React can dectect such changes
+
+#Using immutable.js for creating a copy optimally
+
+#Lifting State Up
+#Binding scope of method
+this.props.createIssue(sampleIssue);
+<IssueAdd createIssue={this.createIssue.bind(this)} />
+#Question, defferent if not using bind
+ƒ createIssue(issue) -> not bind , this is not IssueAdd or IssueList, typically the window object
+ƒ bound createIssue() -> bound, this is IssueList
+
+
+#Event Handling
+Create a #form with 2 input #textbox
+and a #button to trigger action
+override #onSubmit of #form
+<form name="issueAdd" onSubmit={this.handleSubmit}>
+
+#Stateless Components
+For performence issue,
+Convert IssueRow to Stateless component (not using class)
