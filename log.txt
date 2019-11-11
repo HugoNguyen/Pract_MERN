@@ -153,3 +153,8 @@ args: object that passed into the field in the query
 EX: setAboutMessage(message: "New Message") -> args is {"message": "New Message"}
 
 #Apollo Playground
+
+#GraphQL Schema File
+#Move defined schema to new file
+#Specify extention to be watch
+"nodemon -w server -e js,graphql server/server.js"

@@ -1,17 +1,18 @@
+const fs = require('fs');
 const express = require('express'); //import express module
 const {ApolloServer} = require('apollo-server-express');//import apollo-server-express, this is graphql server
 
 let aboutMessage = 'Issue Tracker API v1.0'; //declare an arbitrary string
 
 //Define types
-const typeDefs = `
-    type Query {
-        about: String!
-    }
-    type Mutation {
-        setAboutMessage(message:String!): String
-    }
-`;
+// const typeDefs = `
+//     type Query {
+//         about: String!
+//     }
+//     type Mutation {
+//         setAboutMessage(message:String!): String
+//     }
+// `;
 
 const resolvers = {
     Query:{
@@ -35,7 +36,7 @@ function setAboutMessage(_,{message}){
 
 //New an Apollo Server
 const server = new ApolloServer({
-    typeDefs,
+    typeDefs: fs.readFileSync('./server/schema.graphql','utf-8'),
     resolvers
 })
 
