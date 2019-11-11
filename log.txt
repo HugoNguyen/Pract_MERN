@@ -132,3 +132,24 @@ override #onSubmit of #form
 #Stateless Components
 For performence issue,
 Convert IssueRow to Stateless component (not using class)
+
+Day 4, Nov 11 2019
+#Chap 5, Express & GraphQL
+#GraphQL characteristic
+Field specification
+Graph base
+Single endpoint
+Strongly typed
+
+#Build api, called About api
+#Install graphql-tools, apollo-server,appollo-server-express
+$ npm install graphql@0 apollo-server-express@2
+
+#GraphQL Resolver
+Resolver func are supplied 4 args
+fieldName(obj, args, context, info)
+obj: contains the result returned from the resolver. Enable the nested nature of GraphQL query
+args: object that passed into the field in the query
+EX: setAboutMessage(message: "New Message") -> args is {"message": "New Message"}
+
+#Apollo Playground
