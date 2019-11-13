@@ -4,19 +4,32 @@ const {ApolloServer} = require('apollo-server-express');//import apollo-server-e
 
 let aboutMessage = 'Issue Tracker API v1.0'; //declare an arbitrary string
 
-//Define types
-// const typeDefs = `
-//     type Query {
-//         about: String!
-//     }
-//     type Mutation {
-//         setAboutMessage(message:String!): String
-//     }
-// `;
+const issuesDB = [
+    {
+        id: 1,
+        status: 'New',
+        owner:'Ravan',
+        effort: 5,
+        created: new Date('2018-08-15'),
+        due: undefined,
+        title: 'Error in console when clicking Add'
+    },
+    {
+        id: 2,
+        status: 'Assigned',
+        owner:'Eddie',
+        effort: 14,
+        created: new Date('2018-08-16'),
+        due: new Date('2018-08-30'),
+        title: 'Missing bottom border on panel'
+    }
+];
+
 
 const resolvers = {
     Query:{
         about:()=> aboutMessage,
+        issueList,
     },
     Mutation:{
         setAboutMessage,
@@ -32,6 +45,10 @@ EX: setAboutMessage(message: "New Message") -> args is {"message": "New Message"
 //Access the message property in 'args'
 function setAboutMessage(_,{message}){
     return aboutMessage = message;
+}
+
+function issueList(){
+    return issuesDB;
 }
 
 //New an Apollo Server

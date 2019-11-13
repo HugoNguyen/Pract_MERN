@@ -158,3 +158,10 @@ EX: setAboutMessage(message: "New Message") -> args is {"message": "New Message"
 #Move defined schema to new file
 #Specify extention to be watch
 "nodemon -w server -e js,graphql server/server.js"
+
+Day 5, Nov 13 2019
+Continue chap 5
+#List API
+Define type Issue, property is datetime, using string to denote
+
+issue:[Issue!]! => a list of Issue, return value is optional, each element in array can not null
