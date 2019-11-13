@@ -18,26 +18,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-//For explicitness, rename 'issues' -> 'initialIssues'
-var initialIssues = [{
-  id: 1,
-  status: 'New',
-  owner: 'Ravan',
-  effort: 5,
-  created: new Date('2018-08-15'),
-  due: undefined,
-  title: 'Error in console when clicking Add'
-}, {
-  id: 2,
-  status: 'Assigned',
-  owner: 'Eddie',
-  effort: 14,
-  created: new Date('2018-08-16'),
-  due: new Date('2018-08-30'),
-  title: 'Missing bottom border on panel'
-}]; // const sampleIssue = {
-//     status: 'New', owner: 'Pieta', title: 'Completion date should be optional'
-// }
+var dateRegex = new RegExp('^\\d\\d\\d\\d-\\d\\d-\\d\\d');
+
+function jsonDateReviver(key, value) {
+  if (dateRegex.test(value)) {
+    return new Date(value);
+  } else {
+    return value;
+  }
+}
 
 var IssueFilter =
 /*#__PURE__*/
@@ -58,54 +47,12 @@ function (_React$Component) {
   }]);
 
   return IssueFilter;
-}(React.Component); // class IssueRow extends React.Component {
-//     render(){
-//         const issue = this.props.issue;
-//         return(
-//             <tr>
-//                 <td>{issue.id}</td>
-//                 <td>{issue.status}</td>
-//                 <td>{issue.owner}</td>
-//                 <td>{issue.created.toDateString()}</td>
-//                 <td>{issue.effort}</td>
-//                 <td>{issue.due? issue.due.toDateString():''}</td>
-//                 <td>{issue.title}</td>
-//             </tr>
-//         );
-//     }
-// }
-
+}(React.Component);
 
 function IssueRow(props) {
   var issue = props.issue;
-  return React.createElement("tr", null, React.createElement("td", null, issue.id), React.createElement("td", null, issue.status), React.createElement("td", null, issue.owner), React.createElement("td", null, issue.created.toDateString()), React.createElement("td", null, issue.effort), React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), React.createElement("td", null, issue.title));
-} // class IssueTable extends React.Component {
-//     constructor(){
-//         super();
-//     }
-//     render(){
-//         const issueRows = this.props.issues.map(issue=><IssueRow key={issue.id} issue={issue}/>);
-//         return(
-//             <table className="bordered-table">
-//                 <thead>
-//                     <tr>
-//                         <th>ID</th>
-//                         <th>Status</th>
-//                         <th>Owner</th>
-//                         <th>Created</th>
-//                         <th>Effort</th>
-//                         <th>Due Date</th>
-//                         <th>Title</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {issueRows}
-//                 </tbody>
-//             </table>
-//         );
-//     }
-// }
-
+  return React.createElement("tr", null, React.createElement("td", null, issue.id), React.createElement("td", null, issue.status), React.createElement("td", null, issue.owner), React.createElement("td", null, issue.created.toISOString().slice(0, 10)), React.createElement("td", null, issue.effort), React.createElement("td", null, issue.due ? issue.due.toISOString().slice(0, 10) : ''), React.createElement("td", null, issue.title));
+}
 
 function IssueTable(props) {
   var issueRows = props.issues.map(function (issue) {
@@ -129,10 +76,7 @@ function (_React$Component2) {
 
     _classCallCheck(this, IssueAdd);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(IssueAdd).call(this)); // setTimeout(()=>{
-    //     this.props.createIssue(sampleIssue);
-    // },2000);
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(IssueAdd).call(this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -199,13 +143,42 @@ function (_React$Component3) {
   }, {
     key: "loadData",
     value: function loadData() {
-      var _this3 = this;
+      var query, response, body, result;
+      return regeneratorRuntime.async(function loadData$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              //Change memory variable initialIssues to fetch from api
+              query = "query {\n            issueList{\n                id title status owner created effort due\n            }\n        }";
+              _context.next = 3;
+              return regeneratorRuntime.awrap(fetch('/graphql', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  query: query
+                })
+              }));
 
-      setTimeout(function () {
-        _this3.setState({
-          issues: initialIssues
-        });
-      }, 500);
+            case 3:
+              response = _context.sent;
+              _context.next = 6;
+              return regeneratorRuntime.awrap(response.text());
+
+            case 6:
+              body = _context.sent;
+              result = JSON.parse(body, jsonDateReviver);
+              this.setState({
+                issues: result.data.issueList
+              });
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, this);
     }
   }, {
     key: "createIssue",

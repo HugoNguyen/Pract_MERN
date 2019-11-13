@@ -165,3 +165,9 @@ Continue chap 5
 Define type Issue, property is datetime, using string to denote
 
 issue:[Issue!]! => a list of Issue, return value is optional, each element in array can not null
+
+#Custom Scalar Types
+Define a custom scalar type date
+date format #ISO 8601
+
+using #reviver func, to override JSON.parse(), convert datestring to DateObject
