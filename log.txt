@@ -171,3 +171,7 @@ Define a custom scalar type date
 date format #ISO 8601
 
 using #reviver func, to override JSON.parse(), convert datestring to DateObject
+
+Day 6, Nov 15 2019
+Continue chap 5
+#The Create Api

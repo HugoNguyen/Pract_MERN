@@ -2,6 +2,7 @@ const fs = require('fs');
 const express = require('express'); //import express module
 const {ApolloServer} = require('apollo-server-express');//import apollo-server-express, this is graphql server
 const {GraphQLScalarType} = require('graphql');
+const {Kind} = require('graphql/language');
 
 let aboutMessage = 'Issue Tracker API v1.0'; //declare an arbitrary string
 
@@ -31,6 +32,17 @@ const GraphQLDate = new GraphQLScalarType({
     description: 'A Date() type in GraphQL as a scalar',
     serialize(value){
         return value.toISOString();
+    },
+    parseValue(value){
+        var rs = new Date(value);
+        console.log({'parseValue':rs});
+        return rs;
+    },
+    parseLiteral(ast){
+        var rs = (ast.kind == Kind.STRING) ? new Date(ast.value) : undefined;
+        debugger;
+        console.log({'parseLiteral':rs});
+        return rs;
     }
 });
 
@@ -41,6 +53,7 @@ const resolvers = {
     },
     Mutation:{
         setAboutMessage,
+        issueAdd,
     },
     GraphQLDate,
 };
@@ -58,6 +71,17 @@ function setAboutMessage(_,{message}){
 
 function issueList(){
     return issuesDB;
+}
+
+function issueAdd(_,{issue}){
+    debugger;
+    issue.created = new Date();
+    issue.id = issuesDB.length+1;
+    if(issue.status == undefined){
+        issue.status = 'New';
+    }
+    issuesDB.push(issue);
+    return issue;
 }
 
 //New an Apollo Server
