@@ -175,3 +175,12 @@ using #reviver func, to override JSON.parse(), convert datestring to DateObject
 Day 6, Nov 15 2019
 Continue chap 5
 #The Create Api
+
+Day 7, Nov 16 2019
+Continue chap 5
+#Create API integration
+
+Day 8, Nov 30 2019
+#Query variables
+
+

@@ -74,7 +74,6 @@ function issueList(){
 }
 
 function issueAdd(_,{issue}){
-    debugger;
     issue.created = new Date();
     issue.id = issuesDB.length+1;
     if(issue.status == undefined){
