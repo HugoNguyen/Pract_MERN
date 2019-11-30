@@ -183,4 +183,8 @@ Continue chap 5
 Day 8, Nov 30 2019
 #Query variables
 
+#Input Validation
+#Declare Enum
+#Declare default value
+
 

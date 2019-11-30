@@ -1,6 +1,6 @@
 const fs = require('fs');
 const express = require('express'); //import express module
-const {ApolloServer} = require('apollo-server-express');//import apollo-server-express, this is graphql server
+const {ApolloServer, UserInputError} = require('apollo-server-express');//import apollo-server-express, this is graphql server
 const {GraphQLScalarType} = require('graphql');
 const {Kind} = require('graphql/language');
 
@@ -34,13 +34,22 @@ const GraphQLDate = new GraphQLScalarType({
         return value.toISOString();
     },
     parseValue(value){
-        var rs = new Date(value);
+        //var rs = new Date(value);
+        //console.log({'parseValue':rs});
+        //return rs;
+        const dateValue = new Date(value);
+        const rs = isNaN(dateValue)? undefined : dateValue;
         console.log({'parseValue':rs});
         return rs;
     },
     parseLiteral(ast){
-        var rs = (ast.kind == Kind.STRING) ? new Date(ast.value) : undefined;
-        debugger;
+        //var rs = (ast.kind == Kind.STRING) ? new Date(ast.value) : undefined;
+        var rs = undefined;
+        if(ast.kind == Kind.STRING){
+            const value = new Date(ast.value);
+            rs = isNaN(value) ? undefined : value;
+        }
+        
         console.log({'parseLiteral':rs});
         return rs;
     }
@@ -74,19 +83,39 @@ function issueList(){
 }
 
 function issueAdd(_,{issue}){
+    validateIssue(_,{issue});
     issue.created = new Date();
     issue.id = issuesDB.length+1;
-    if(issue.status == undefined){
-        issue.status = 'New';
-    }
+    // if(issue.status == undefined){
+    //     issue.status = 'New';
+    // }
     issuesDB.push(issue);
     return issue;
+}
+
+function validateIssue(_,{issue}){
+    const errors = [];
+    if(issue.title.length<3){
+        errors.push('Field "title" must be at least  3 characters long');
+    }
+
+    if(issue.status== 'Assigned' && !issue.owner){
+        errors.push('Field "owner" is required when status is "Assigned"');
+    }
+
+    if(errors.length>0){
+        throw new UserInputError('Invalid input(s)',{errors});
+    }
 }
 
 //New an Apollo Server
 const server = new ApolloServer({
     typeDefs: fs.readFileSync('./server/schema.graphql','utf-8'),
-    resolvers
+    resolvers,
+    formatError: error =>{
+        console.log(error);
+        return error;
+    }
 })
 
 const app = express(); //new express app web server
