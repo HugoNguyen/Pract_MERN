@@ -197,4 +197,18 @@ Create utility func that handles:
 - All API calls
 - Report errors
 
+#Mongo
+Install mongo
+Start using MongoDb Atlas: https://cloud.mongodb.com/
+Create new user admin, call "hugo/123QWE"
+Connect to mongo by "Compass" or "Shell"
+Conect by Shell:
+$mongo "mongodb+srv://cluster0-brgc0.azure.mongodb.net/test"  --username hugo
+-->input password
+Create db "issuetracker"
+$use issuetracker
 
+#MongoDB Node.js Driver
+- Mongoose, high level Object Document Mapping for mongo
+- MongoDb, low level , using for this project 'IssueTracking'
+$npm install mongodb@3
