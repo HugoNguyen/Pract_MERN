@@ -187,4 +187,14 @@ Day 8, Nov 30 2019
 #Declare Enum
 #Declare default value
 
+Day 9, Dec 1 2019
+#Display error
+Transport errors, such as:
+- Network connection problem
+- Invalid user input
+
+Create utility func that handles:
+- All API calls
+- Report errors
+
 
